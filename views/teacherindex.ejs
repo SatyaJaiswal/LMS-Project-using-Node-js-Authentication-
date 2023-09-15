@@ -1,0 +1,260 @@
+<%- include('teacherheader') %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Style for the dashboard container */
+        .dashboard-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Style for the left side dashboard */
+        .dashboard-left {
+            width: 20%;
+            height: 800px;
+            background-color: #050505;
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Style for the right side content */
+        .dashboard-right {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Style for the image and title in the left side */
+        .dashboard-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Style for buttons */
+        .dashboard-button {
+            display: block;
+            margin-bottom: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        /* Style for dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        /* Style for dropdown items */
+        .dropdown-item {
+            padding: 12px 16px;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Show dropdown on hover */
+        .dashboard-button:hover .dropdown-content {
+            display: block;
+        }
+        .teac-icon a{
+            color: white;
+        }
+        .teac-icon a i{
+            font-size: 50px;
+            margin-left: 105px;
+        }
+        .addstudent a{
+            color: white;
+            text-decoration: none;
+        }
+        .addstudent a i{
+            font-size: 18px;
+            font-style: normal;
+            font-family: 'Kanit', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .addstudent a :hover{
+            text-decoration: underline;
+        }
+        .addbatch a{
+            color: white;
+            text-decoration: none;
+        }
+        .addbatch a i{
+            font-size: 18px;
+            font-style: normal;
+            font-family: 'Kanit', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .addbatch a :hover{
+            text-decoration: underline;
+        }
+        .zoom-link a{
+            color: white;
+            text-decoration: none;
+        }
+        .zoom-link a i{
+            font-size: 18px;
+            font-style: normal;
+            font-family: 'Kanit', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Left Side Dashboard -->
+        <div class="dashboard-left">
+           <div class="teac-icon">
+            <a href="#"><i class="bi bi-person-circle"></i></a>
+            <p style="margin-left: 80px;">Teacher name</p>
+           </div>
+           <hr>
+            <!-- Button with Dropdown -->
+            <div class="addstudent">
+                <a href="/addstudent"><i class="bi bi-person-add"> &nbsp; &nbsp; Add Student</i></a>
+            </div>
+            <hr>
+            <!-- Other Buttons -->
+            <div id="batch-content">
+                <div class="addbatch">
+                    <a href="/batch" id="create-batch-link"><i class="bi bi-plus-circle-fill">&nbsp; &nbsp; Create Batch</i></a>
+                </div>
+                
+            </div>
+
+            <hr>
+            <div class="zoom-link">
+                <a href="#"><i class="bi bi-camera-video">&nbsp; &nbsp; Generate ZoomLink</i></a>
+            </div>
+        </div>
+
+        <!-- Right Side Content -->
+        <div class="dashboard-right">
+        
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <!-- Add an ID to the table for easier access in JavaScript -->
+                            <table class="table table-striped text-center" id="studentData">
+                                <thead>
+                                    <tr class="table-dark">
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Username</th>
+                                        <th>WhatsApp</th>
+                                        <th>Password</th>
+                                        <th>Batch</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% addstudent.forEach((row, index) => { %>
+                                        <!-- Loop through each student and display their details -->
+                                        <tr class="student-row">
+                                            <td><%= index + 1 %></td>
+                                            <td><%= row.fullName %></td>
+                                            <td><%= row.emailaddress %></td>
+                                            <td><%= row.username %></td>
+                                            <td><%= row.whatsappNo %></td>
+                                            <td><%= row.password %></td>
+                                            <td class="batch-cell">
+                                                <% if (row.batch1 || row.batch2 || row.batch3) { %>
+                                                    <% if (row.batch1) { %> Batch 1 <% } %>
+                                                    <% if (row.batch2) { %> Batch 2 <% } %>
+                                                    <% if (row.batch3) { %> Batch 3 <% } %>
+                                                <% } else { %>
+                                                    No Batch Selected
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <a href="/edit/<%= row._id %>" class="text-success"><i
+                                                        class="fas fa-edit fa-lag mx-1"></i></a>
+                                                <a href="/delete/<%= row._id %>" class="text-danger"><i
+                                                        class="fas fa-trash fa-lag mx-1"></i></a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script>
+        // Get a reference to the select element
+        const batchFilterSelect = document.getElementById("batchFilter");
+
+        // Get all student rows
+        const studentRows = document.querySelectorAll(".student-row");
+
+        // Add an event listener to the batch filter dropdown
+        batchFilterSelect.addEventListener("change", function () {
+            const selectedBatch = batchFilterSelect.value;
+
+            // Loop through all student rows and hide/show them based on the selected batch
+            studentRows.forEach(function (row) {
+                const batchCell = row.querySelector(".batch-cell");
+
+                if (selectedBatch === "" || batchCell.textContent.includes(selectedBatch)) {
+                    row.style.display = "table-row";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    </script>
+<!-- 
+    <script>
+        // Function to load the batch.ejs content
+        function loadBatchContent() {
+            // Send an AJAX request to the server
+            fetch('/batch', {
+                method: 'GET'
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Replace the content of the batch-content div with the fetched HTML
+                document.getElementById('batch-content').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error fetching batch content:', error);
+            });
+        }
+    
+        // Add a click event listener to the "Create Batch" link
+        document.getElementById('create-batch-link').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default link behavior
+            loadBatchContent(); // Call the function to load batch content
+        });
+    </script> -->
+    
+
+</body>
+
+</html>

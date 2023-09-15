@@ -1,0 +1,46 @@
+<%- include('header') %>
+
+<div class="container">
+    <div class="row my-6">
+        <div class="col-lg-12 ">
+
+            <div class="table-responsive">
+                <% if ( teacher1.length > 0) { %> 
+
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr class="table-dark">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Username</th>
+                                <th>Phone</th>
+                                <th>Password</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% teacher1.forEach((row, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= row.name %></td>
+                                    <td><%= row.email %></td>
+                                    <td><%= row.username %></td>
+                                    <td><%= row.phone %></td>
+                                    <td><%= row.password %></td>
+                                    <td>
+                                        <a href="/edit/<%= row._id %>" class="text-success"><i class="fas fa-edit fa-lag mx-1"></i></a>
+                                        <a href="/delete/<%= row._id %>" class="text-danger"><i class="fas fa-trash fa-lag mx-1"></i></a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+
+                <% } else { %>
+                    <h1 class="text-center text-secondary mt-5"> No users Found in the database</h1>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

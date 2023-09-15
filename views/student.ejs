@@ -1,0 +1,92 @@
+<%- include('header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</head>
+<style>
+    h3{
+        margin-top: 70px;
+        text-align: center;
+        color: red;
+    }
+    .card-container {
+        margin-top: 120px;
+        display: flex;
+        justify-content: center;
+    }
+    .card {
+        margin: 0 15px;
+        text-align: center;
+    }
+</style>
+<body>
+    <h3>Welcome to the Student Portal</h3>
+
+    <div class="card-container">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Batch 1</h5>
+                <p class="card-text">Join our class now</p>
+                <div id="batch1" class="text-danger"></div>
+                <a href="#" class="btn btn-primary">Join</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Batch 2</h5>
+                <p class="card-text">Join our class now</p>
+                <div id="batch2" class="text-danger"></div>
+                <a href="#" class="btn btn-primary">Join</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Batch 3</h5>
+                <p class="card-text">Join our class now</p>
+                <div id="batch3" class="text-danger"></div>
+                <a href="#" class="btn btn-primary">Join</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update the countdown timer
+        function updateCountdown(targetDate, countdownElement) {
+            const now = new Date();
+            const timeRemaining = targetDate - now;
+            
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+        
+            countdownElement.innerHTML = `Time left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        
+            if (timeRemaining <= 0) {
+                countdownElement.innerHTML = "Time's up!";
+            }
+        }
+    
+        // Update the countdown for Batch 1
+        const targetDateBatch1 = new Date("2023-12-31T23:59:59"); // Replace with actual date
+        const countdownElementBatch1 = document.getElementById("batch1");
+        setInterval(() => updateCountdown(targetDateBatch1, countdownElementBatch1), 1000);
+
+        // Update the countdown for Batch 2
+        const targetDateBatch2 = new Date("2023-12-31T23:59:59"); // Replace with actual date
+        const countdownElementBatch2 = document.getElementById("batch2");
+        setInterval(() => updateCountdown(targetDateBatch2, countdownElementBatch2), 1000);
+
+        // Update the countdown for Batch 3
+        const targetDateBatch3 = new Date("2023-12-31T23:59:59"); // Replace with actual date
+        const countdownElementBatch3 = document.getElementById("batch3");
+        setInterval(() => updateCountdown(targetDateBatch3, countdownElementBatch3), 1000);
+    </script>
+</body>
+</html>

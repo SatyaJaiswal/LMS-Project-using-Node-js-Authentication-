@@ -1,0 +1,71 @@
+<%- include('teacherheader') %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- <title>Edit Student</title> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-lg-12">
+                <h2>Edit Student</h2>
+                <form action="/edit/<%= student._id %>" method="POST">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" value="<%= student.fullName %>"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailaddress">Email Address</label>
+                        <input type="email" class="form-control" id="emailaddress" name="emailaddress"
+                            value="<%= student.emailaddress %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="<%= student.username %>"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsappNo">WhatsApp Number</label>
+                        <input type="text" class="form-control" id="whatsappNo" name="whatsappNo"
+                            value="<%= student.whatsappNo %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="<%= student.password %>"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Batches:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkboxOption1" name="batch1"
+                                <%= student.batches && student.batches.batch1 ? 'checked' : '' %>>
+                            <label class="form-check-label" for="checkboxOption1">Batch 1</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkboxOption2" name="batch2"
+                                <%= student.batches && student.batches.batch2 ? 'checked' : '' %>>
+                            <label class="form-check-label" for="checkboxOption2">Batch 2</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="checkboxOption3" name="batch3"
+                                <%= student.batches && student.batches.batch3 ? 'checked' : '' %>>
+                            <label class="form-check-label" for="checkboxOption3">Batch 3</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
